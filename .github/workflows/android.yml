@@ -1,5 +1,6 @@
 
 name: Android CI (Debug APK)
+run-name: ./gradlew assembleDebug
 
 on:
   push:
