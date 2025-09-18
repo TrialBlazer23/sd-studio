@@ -1,3 +1,4 @@
+
 name: Android CI (Debug APK)
 
 on:
@@ -19,6 +20,9 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
@@ -30,13 +34,8 @@ jobs:
             "build-tools;35.0.0" \
             "cmdline-tools;latest"
 
-      - name: Build Debug APK (using Gradle without wrapper)
-        uses: gradle/gradle-build-action@v3
-        with:
-          gradle-version: 8.7
-          arguments: |
-            help
-            assembleDebug
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
